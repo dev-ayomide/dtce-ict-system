@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+/* Configure Tailwind v4 */
+@theme {
+  --default-transition-duration: 150ms;
+}
+
+/* Enable dark mode */
+@variant dark (.dark &);
+
+/* Apply Montserrat to all elements */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
