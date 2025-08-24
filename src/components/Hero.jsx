@@ -20,22 +20,22 @@ return (
             <div className="flex justify-center items-center mb-12 sm:mb-20 overflow-x-auto">
                 <div className="flex items-center justify-center relative min-w-max">
                     <img 
-                        src="/src/assets/images/heroimage-1.png" 
+                        src="/heroimage-1.png" 
                         alt="Digital Ministry" 
                         className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-full object-cover shadow-lg relative z-10"
                     />
                     <img 
-                        src="/src/assets/images/heroimage-2.png" 
+                        src="/heroimage-2.png" 
                         alt="Technology Solutions" 
                         className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-full object-cover shadow-lg relative -ml-8 sm:-ml-10 lg:-ml-12 z-20"
                     />
                     <img 
-                        src="/src/assets/images/heroimage-3.png" 
+                        src="/heroimage-3.png" 
                         alt="Community Building" 
                         className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-full object-cover shadow-lg relative -ml-8 sm:-ml-10 lg:-ml-12 z-30"
                     />
                     <img 
-                        src="/src/assets/images/heroimage-4.png" 
+                        src="/heroimage-4.png" 
                         alt="Innovation" 
                         className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-full object-cover shadow-lg relative -ml-8 sm:-ml-10 lg:-ml-12 z-40"
                     />
@@ -47,7 +47,7 @@ return (
                 <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
                     <div className="w-full lg:w-1/3">
                         <img 
-                            src="/src/assets/images/welcome.png" 
+                            src="/welcome.png" 
                             alt="VR Vision" 
                             className="w-full h-48 sm:h-64 lg:h-auto object-cover rounded-xl sm:rounded-2xl"
                         />

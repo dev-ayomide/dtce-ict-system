@@ -3,27 +3,27 @@ export default function Subunit() {
     {
       title: "Technical unit",
       description: "Brings creative ideas through software development and system management",
-      iconPath: "/src/assets/images/technical-icon.svg"
+      iconPath: "/technical-icon.svg"
     },
     {
       title: "CBS",
       description: "Captures and creates compelling visual content for ministry events and communications",
-      iconPath: "/src/assets/images/cbs-icon.svg"
+      iconPath: "/cbs-icon.svg"
     },
     {
       title: "Cybersecurity",
       description: "Protects our digital assets and ensures a safe online environment for all",
-      iconPath: "/src/assets/images/cybersecurity-icon.svg"
+      iconPath: "/cybersecurity-icon.svg"
     },
     {
       title: "Data Analysis",
       description: "Leverages data to drive smarter, data-led decisions and ministry growth",
-      iconPath: "/src/assets/images/data-analysis-icon.svg"
+      iconPath: "/data-analysis-icon.svg"
     },
     {
       title: "Research and Innovation",
       description: "Explores emerging technologies to extend and enhance our digital outreach",
-      iconPath: "/src/assets/images/research-icon.svg"
+      iconPath: "/research-icon.svg"
     }
   ]
 
@@ -84,12 +84,12 @@ export default function Subunit() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4">
           {[
-            '/src/assets/images/showcase1.jpg',
-            '/src/assets/images/showcase2.jpg',
-            '/src/assets/images/showcase3.jpg',
-            '/src/assets/images/showcase4.jpg',
-            '/src/assets/images/showcase5.jpg',
-            '/src/assets/images/showcase6.jpg',
+            '/showcase1.jpg',
+            '/showcase2.jpg',
+            '/showcase3.jpg',
+            '/showcase4.jpg',
+            '/showcase5.jpg',
+            '/showcase6.jpg',
           ].map((imagePath, index) => (
             <div key={index} className="aspect-square bg-gray-200 rounded-lg overflow-hidden hover:scale-105 transition-transform">
               <img 

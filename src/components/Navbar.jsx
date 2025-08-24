@@ -46,7 +46,7 @@ export default function Navbar() {
         <div className="bg-[#F2F2F2E5] dark:bg-gray-800/90 backdrop-blur-sm shadow-lg rounded-full px-4 lg:px-6 py-2 lg:py-3 flex items-center justify-between min-w-fit">
           <div className="flex items-center mr-4 lg:mr-8">
             <img 
-              src="/src/assets/images/dtce-logo.svg"
+              src="/dtce-logo.svg"
               alt="DTCE ICT Logo" 
               className="w-8 h-8 lg:w-10 lg:h-10 rounded-full mr-2 lg:mr-3"
             />
@@ -143,7 +143,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/src/assets/images/dtce-logo.svg"
+              src="/dtce-logo.svg"
               alt="DTCE ICT Logo" 
               className="w-8 h-8 rounded-full mr-2"
             />

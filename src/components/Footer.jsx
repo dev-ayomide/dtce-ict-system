@@ -9,9 +9,9 @@ export default function Footer() {
     ]
 
     const socialIcons = [
-        { name: "Twitter", iconPath: "/src/assets/images/x-icon.svg", href: "#" },
-        { name: "Instagram", iconPath: "/src/assets/images/instagram-icon.svg", href: "#" },
-        { name: "Telegram", iconPath: "/src/assets/images/telegram-icon.svg", href: "#" }
+        { name: "Twitter", iconPath: "/x-icon.svg", href: "#" },
+        { name: "Instagram", iconPath: "/instagram-icon.svg", href: "#" },
+        { name: "Telegram", iconPath: "/telegram-icon.svg", href: "#" }
     ]
 
     return (
@@ -20,7 +20,7 @@ export default function Footer() {
                 {/* Logo Section */}
                 <div className="flex justify-center sm:justify-start mb-8 sm:mb-10 lg:mb-12">
                     <img 
-                        src="/src/assets/images/dtce-logo.svg" 
+                        src="/dtce-logo.svg" 
                         alt="DTCE ICT Logo" 
                         className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24"
                     />

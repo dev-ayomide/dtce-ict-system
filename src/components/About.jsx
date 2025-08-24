@@ -35,7 +35,7 @@ export default function About() {
                     <div className="w-full lg:w-1/2 flex justify-center">
                         <div className="relative max-w-md lg:max-w-none w-full">
                             <img 
-                                src="/src/assets/images/about-image.png" 
+                                src="/about-image.png" 
                                 alt="RCCG DTCE ICT Department" 
                                 className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-xl sm:rounded-2xl shadow-xl"
                             />
