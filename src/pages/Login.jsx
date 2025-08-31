@@ -31,7 +31,7 @@ export default function Login() {
         // Create mock user data
         const userData = {
           id: 1,
-          name: "John Doe",
+          name: "Ayomide Taiwo",
           email: formData.email,
           role: "ICT Member",
           department: "Technical Unit",

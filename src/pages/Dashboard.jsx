@@ -1,29 +1,46 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 import DashboardNavbar from "../components/DashboardNavbar"
 import DashboardSidebar from "../components/DashboardSidebar"
 
 export default function Dashboard() {
   const [user, setUser] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 52, seconds: 39 })
   const navigate = useNavigate()
+  const { user: authUser, logout } = useAuth()
 
   useEffect(() => {
     // Check if user is authenticated
-    const isAuthenticated = localStorage.getItem('isAuthenticated')
-    const userData = localStorage.getItem('user')
-    
-    if (!isAuthenticated || !userData) {
+    if (!authUser) {
       navigate("/login")
       return
     }
 
-    setUser(JSON.parse(userData))
-  }, [navigate])
+    setUser(authUser)
+  }, [authUser, navigate])
+
+  useEffect(() => {
+    // Countdown timer
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev.seconds > 0) {
+          return { ...prev, seconds: prev.seconds - 1 }
+        } else if (prev.minutes > 0) {
+          return { ...prev, minutes: prev.minutes - 1, seconds: 59 }
+        } else if (prev.hours > 0) {
+          return { hours: prev.hours - 1, minutes: 59, seconds: 59 }
+        }
+        return prev
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem('user')
-    localStorage.removeItem('isAuthenticated')
+    logout()
     navigate("/")
   }
 
@@ -31,143 +48,152 @@ export default function Dashboard() {
     return <div>Loading...</div>
   }
 
+  const getGreeting = () => {
+    const hour = new Date().getHours()
+    if (hour < 12) return "GOOD MORNING"
+    if (hour < 17) return "GOOD AFTERNOON"
+    return "GOOD EVENING"
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white">
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}
         onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)}
       />
       
-      <div className="flex">
-        <DashboardSidebar 
-          isOpen={isSidebarOpen} 
-          onClose={() => setIsSidebarOpen(false)}
-        />
-        
-        <main className="flex-1 p-4 md:p-6 lg:p-8">
-          {/* Welcome Section */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 mb-6 shadow-sm">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              Welcome back, {user.name}! 👋
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Here's what's happening in your ICT department today.
-            </p>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-              <div className="flex items-center">
-                <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Projects</p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">24</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-              <div className="flex items-center">
-                <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
-                  <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Completed</p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">18</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-              <div className="flex items-center">
-                <div className="p-2 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
-                  <svg className="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">In Progress</p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">6</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-              <div className="flex items-center">
-                <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
-                  <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Team Members</p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">12</p>
-                </div>
-              </div>
+      <DashboardSidebar 
+        isOpen={isSidebarOpen} 
+        onClose={() => setIsSidebarOpen(false)}
+      />
+      
+      <main className="p-4 space-y-6">
+        {/* Logo and Greeting Section */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
+              <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 01-1.06 0l-1.591-1.591a.75.75 0 111.06-1.06l1.591 1.591a.75.75 0 010 1.06zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 01-1.06 0l-1.591-1.591a.75.75 0 111.06-1.06l1.591 1.591a.75.75 0 010 1.06zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 01-1.061 0l-1.591-1.591a.75.75 0 10-1.06 1.06l1.591 1.591a.75.75 0 001.06 0zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 01-1.06 0l-1.591-1.591a.75.75 0 001.06-1.06l1.591 1.591a.75.75 0 010 1.06z" />
+              </svg>
+              <span className="text-sm  text-gray-900">{getGreeting()}, {user?.name?.split(' ')[0]?.toUpperCase() || 'USER'}</span>
             </div>
           </div>
+        </div>
 
-          {/* Recent Activity */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm mb-8">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Recent Activity</h2>
-            <div className="space-y-4">
-              {[
-                { action: "New project created", project: "Digital Ministry Portal", time: "2 hours ago", user: "Sarah Johnson" },
-                { action: "Task completed", project: "Security Audit", time: "4 hours ago", user: "Mike Chen" },
-                { action: "Code review submitted", project: "Mobile App", time: "6 hours ago", user: "Alex Rodriguez" },
-                { action: "Meeting scheduled", project: "Weekly Standup", time: "1 day ago", user: "Team Lead" }
-              ].map((activity, index) => (
-                <div key={index} className="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                  <div className="flex-1">
-                    <p className="text-sm text-gray-900 dark:text-white">
-                      <span className="font-medium">{activity.action}</span> for {activity.project}
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      by {activity.user} • {activity.time}
-                    </p>
-                  </div>
+        {/* Activity Tracker */}
+        <div className="bg-[#E6F0FF] rounded-2xl p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Activity Tracker</h2>
+          <div className="space-y-3 mb-6">
+            <div className="flex justify-between items-center">
+              <span className="text-black">My Task</span>
+              <span className="text-md font-bold text-gray-900">5</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-black">Ongoing Task</span>
+              <span className="text-md font-bold text-gray-900">4</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-black">Completed Task</span>
+              <span className="text-md font-bold text-gray-900">1</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Countdown Section */}
+        <div className="bg-[#D0E3FF] rounded-2xl p-6">
+          <h2 className="text-lg text-center font-bold text-gray-900 mb-4">Countdown to task deadline</h2>
+          <div className="text-center">
+            <div className="flex justify-center space-x-2 mb-2">
+              <div className="bg-white rounded-lg px-3 py-2 min-w-[60px]">
+                <p className="text-2xl font-bold text-gray-900">{timeLeft.hours.toString().padStart(2, '0')}</p>
+              </div>
+              <div className="text-2xl font-bold text-gray-900">:</div>
+              <div className="bg-white rounded-lg px-3 py-2 min-w-[60px]">
+                <p className="text-2xl font-bold text-gray-900">{timeLeft.minutes.toString().padStart(2, '0')}</p>
+              </div>
+              <div className="text-2xl font-bold text-gray-900">:</div>
+              <div className="bg-white rounded-lg px-3 py-2 min-w-[60px]">
+                <p className="text-2xl font-bold text-gray-900">{timeLeft.seconds.toString().padStart(2, '0')}</p>
+              </div>
+            </div>
+            <div className="flex justify-center space-x-2 text-xs text-gray-500">
+              <span className="min-w-[60px] text-center">HOURS</span>
+              <span className="min-w-[60px] text-center">MINUTES</span>
+              <span className="min-w-[60px] text-center">SECONDS</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Check-in Streak */}
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-900">Check in Streak</h2>
+            <div className="flex items-center space-x-2">
+              <svg className="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 01-1.06 0l-1.591-1.591a.75.75 0 111.06-1.06l1.591 1.591a.75.75 0 010 1.06zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 01-1.06 0l-1.591-1.591a.75.75 0 111.06-1.06l1.591 1.591a.75.75 0 010 1.06zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 01-1.061 0l-1.591-1.591a.75.75 0 10-1.06 1.06l1.591 1.591a.75.75 0 001.06 0zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 01-1.06 0l-1.591-1.591a.75.75 0 001.06-1.06l1.591 1.591a.75.75 0 010 1.06z" />
+              </svg>
+              <span className="text-lg font-semibold text-blue-600">4 Days</span>
+            </div>
+          </div>
+          
+          <div className="flex justify-between mb-6">
+            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+              <div key={day} className="text-center">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-medium mb-1 ${
+                  index < 4 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-500'
+                }`}>
+                  {day}
                 </div>
-              ))}
-            </div>
+                <p className="text-xs text-gray-500">{index + 1}</p>
+              </div>
+            ))}
           </div>
+          
+          <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors">
+            Clock in
+          </button>
+        </div>
 
-          {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Create Project</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">Start a new ICT project or initiative</p>
-              <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-                New Project
-              </button>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Team Meeting</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">Schedule or join team meetings</p>
-              <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
-                Schedule Meeting
-              </button>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Resources</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">Access ICT tools and documentation</p>
-              <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
-                View Resources
-              </button>
-            </div>
+        {/* My Task */}
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">My Task</h2>
+          <div className="space-y-3 mb-4">
+            {[
+              { task: "ICT System bug fix", status: "green" },
+              { task: "ICT System bug fix", status: "orange" },
+              { task: "ICT System bug fix", status: "gray" }
+            ].map((item, index) => (
+              <div key={index} className="flex items-center space-x-3">
+                <div className={`w-3 h-3 rounded-full ${
+                  item.status === 'green' ? 'bg-green-500' : 
+                  item.status === 'orange' ? 'bg-orange-500' : 'bg-gray-400'
+                }`}></div>
+                <span className="text-gray-700">{item.task}</span>
+              </div>
+            ))}
           </div>
-        </main>
-      </div>
+          <button className="text-blue-600 font-medium hover:underline">Show more</button>
+        </div>
+
+        {/* My Guest */}
+        <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">My Guest</h2>
+          <div className="text-center py-8">
+            <div className="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+              <img 
+                src="/no-guests.svg" 
+                alt="No Guests" 
+                className="w-16 h-16"
+              />
+            </div>
+            <p className="text-gray-500 mb-6">Oops you do not have any Guest today.</p>
+            <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors">
+              Register a visitor
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
   )
 }
