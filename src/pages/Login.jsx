@@ -33,7 +33,7 @@ export default function Login() {
           id: 1,
           name: "Ayomide Taiwo",
           email: formData.email,
-          role: "ICT Member",
+          role: (formData.email || "").toLowerCase().includes("head") ? "Subunit Head" : "ICT Member",
           department: "Technical Unit",
           avatar: "/placeholder.png"
         }

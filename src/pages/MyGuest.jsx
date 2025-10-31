@@ -74,6 +74,7 @@ export default function MyGuest() {
       <DashboardSidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)}
+        user={user}
       />
       
       <main className="p-4">

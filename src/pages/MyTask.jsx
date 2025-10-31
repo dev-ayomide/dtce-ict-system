@@ -97,6 +97,7 @@ export default function MyTask() {
       <DashboardSidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)}
+        user={user}
       />
       
       <main className="p-4">

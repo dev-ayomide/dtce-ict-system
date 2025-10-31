@@ -1,16 +1,27 @@
 import { Link, useLocation } from "react-router-dom"
 
-export default function DashboardSidebar({ isOpen, onClose }) {
+export default function DashboardSidebar({ isOpen, onClose, user }) {
   const location = useLocation();
 
-  const navigation = [
-    { name: "Dashboard", href: "/dashboard" },
-    { name: "Notifications", href: "/dashboard/notifications" },
-    { name: "Attendance", href: "/dashboard/attendance" },
-    { name: "My Task", href: "/dashboard/my-task" },
-    { name: "My Guest", href: "/dashboard/my-guest" },
-    { name: "Profile", href: "/dashboard/profile" },
-  ];
+  const isSubunitHead = (user?.role || "").toLowerCase().includes("head")
+
+  const navigation = isSubunitHead
+    ? [
+        { name: "Dashboard", href: "/dashboard" },
+        { name: "Notifications", href: "/dashboard/notifications" },
+        { name: "Attendance", href: "/dashboard/attendance" },
+        { name: "Assigned Task", href: "/dashboard/assigned-task" },
+        { name: "Subunit Hub", href: "/dashboard/subunit-hub" },
+        { name: "Profile", href: "/dashboard/profile" },
+      ]
+    : [
+        { name: "Dashboard", href: "/dashboard" },
+        { name: "Notifications", href: "/dashboard/notifications" },
+        { name: "Attendance", href: "/dashboard/attendance" },
+        { name: "My Task", href: "/dashboard/my-task" },
+        { name: "My Guest", href: "/dashboard/my-guest" },
+        { name: "Profile", href: "/dashboard/profile" },
+      ];
 
   return (
     <>
@@ -68,10 +79,10 @@ export default function DashboardSidebar({ isOpen, onClose }) {
           </div>
           <div className="text-center">
             <h3 className="text-base font-medium text-black leading-tight" style={{ fontFamily: "inherit" }}>
-              AYOMIDE TAIWO
+              {(user?.name || "").toUpperCase() || "USER"}
             </h3>
             <p className="text-xs text-[#A3A3A3] mt-1" style={{ fontFamily: "inherit" }}>
-              Technical
+              {user?.department || "ICT"}
             </p>
           </div>
         </div>

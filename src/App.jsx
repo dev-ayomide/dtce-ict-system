@@ -10,6 +10,8 @@ import TaskDetails from "./pages/TaskDetails"
 import GuestDetails from "./pages/GuestDetails"
 import GuestPasscard from "./pages/GuestPasscard"
 import Profile from "./pages/Profile"
+import AssignedTask from "./pages/AssignedTask"
+import SubunitHub from "./pages/SubunitHub"
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
       <Route path="/dashboard/my-guest" element={<MyGuest />} />
       <Route path="/dashboard/attendance" element={<Attendance />} />
       <Route path="/dashboard/my-task" element={<MyTask />} />
+      <Route path="/dashboard/assigned-task" element={<AssignedTask />} />
+      <Route path="/dashboard/subunit-hub" element={<SubunitHub />} />
       <Route path="/dashboard/task/:taskId" element={<TaskDetails />} />
       <Route path="/dashboard/guest/:guestId" element={<GuestDetails />} />
       <Route path="/dashboard/guest/:guestId/passcard" element={<GuestPasscard />} />

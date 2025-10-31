@@ -62,6 +62,7 @@ export default function Profile() {
       <DashboardSidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)}
+        user={user}
       />
       
       <main className="p-4">

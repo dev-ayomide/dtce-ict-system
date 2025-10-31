@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import DashboardNavbar from "../components/DashboardNavbar"
 import DashboardSidebar from "../components/DashboardSidebar"
@@ -55,6 +55,10 @@ export default function Dashboard() {
     return "GOOD EVENING"
   }
 
+  const isSubunitHead = (user?.role || "").toLowerCase().includes("head")
+  const taskLabel = isSubunitHead ? "Assigned Task" : "My Task"
+  const taskListHref = isSubunitHead ? "/dashboard/assigned-task" : "/dashboard/my-task"
+
   return (
     <div className="min-h-screen bg-white">
       <DashboardNavbar 
@@ -66,6 +70,7 @@ export default function Dashboard() {
       <DashboardSidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)}
+        user={user}
       />
       
       <main className="p-4 space-y-6">
@@ -86,7 +91,7 @@ export default function Dashboard() {
           <h2 className="text-xl font-bold text-gray-900 mb-4">Activity Tracker</h2>
           <div className="space-y-3 mb-6">
             <div className="flex justify-between items-center">
-              <span className="text-black">My Task</span>
+              <span className="text-black">{taskLabel}</span>
               <span className="text-md font-bold text-gray-900">5</span>
             </div>
             <div className="flex justify-between items-center">
@@ -155,9 +160,9 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {/* My Task */}
+        {/* Task List (label depends on role) */}
         <div className="bg-white rounded-2xl p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">My Task</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">{taskLabel}</h2>
           <div className="space-y-3 mb-4">
             {[
               { task: "ICT System bug fix", status: "green" },
@@ -173,7 +178,7 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
-          <button className="text-blue-600 font-medium hover:underline">Show more</button>
+          <Link to={taskListHref} className="text-blue-600 font-medium hover:underline">Show more</Link>
         </div>
 
         {/* My Guest */}

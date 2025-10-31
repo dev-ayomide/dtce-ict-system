@@ -81,6 +81,7 @@ export default function TaskDetails() {
       <DashboardSidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)}
+        user={user}
       />
       
       <main className="p-4 space-y-6">
