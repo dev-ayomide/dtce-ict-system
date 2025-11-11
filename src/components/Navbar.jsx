@@ -1,38 +1,13 @@
 import { Link } from "react-scroll"
 import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState } from "react"
+import { useTheme } from "../context/ThemeContext"
 
 export default function Navbar() {
   const navigate = useNavigate()
   const [activeSection, setActiveSection] = useState("hero")
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
-
-  // Toggle dark mode and apply to document
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-    if (!isDarkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }
-
-  // Initialize dark mode on component mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true)
-      document.documentElement.classList.add('dark')
-    }
-  }, [])
-
-  // Save theme preference
-  useEffect(() => {
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
-  }, [isDarkMode])
+  const { isDarkMode, toggleTheme } = useTheme()
 
   const handleLinkClick = (section) => {
     setActiveSection(section)
@@ -112,7 +87,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-2 lg:space-x-3">
             {/* Dark mode toggle */}
             <button 
-              onClick={toggleDarkMode}
+              onClick={toggleTheme}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
               {isDarkMode ? (
@@ -217,7 +192,7 @@ export default function Navbar() {
                 
                 {/* Dark mode toggle */}
                 <button 
-                  onClick={toggleDarkMode}
+                  onClick={toggleTheme}
                   className="p-3 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex-shrink-0"
                 >
                   {isDarkMode ? (

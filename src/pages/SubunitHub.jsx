@@ -32,7 +32,7 @@ export default function SubunitHub() {
   }
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white">Loading...</div>
   }
 
   const members = Array.from({ length: 8 }).map((_, i) => ({
@@ -52,7 +52,7 @@ export default function SubunitHub() {
   )
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <DashboardNavbar
         user={user}
         onLogout={handleLogout}

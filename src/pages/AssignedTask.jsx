@@ -42,7 +42,7 @@ export default function AssignedTask() {
   }
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white">Loading...</div>
   }
 
   const tasks = [
@@ -80,7 +80,7 @@ export default function AssignedTask() {
   const filteredTasks = getFilteredTasks()
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <DashboardNavbar
         user={user}
         onLogout={handleLogout}
@@ -103,7 +103,7 @@ export default function AssignedTask() {
       />
 
       <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Assigned Task</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Assigned Task</h1>
 
         <div className="flex justify-center space-x-2 mb-6">
           <button
@@ -111,7 +111,7 @@ export default function AssignedTask() {
             className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
               activeFilter === "all"
                 ? "bg-blue-600 text-white border border-blue-600"
-                : "bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+                : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
             }`}
           >
             All ({tasks.length})
@@ -121,7 +121,7 @@ export default function AssignedTask() {
             className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
               activeFilter === "pending"
                 ? "bg-blue-600 text-white border border-blue-600"
-                : "bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+                : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
             }`}
           >
             Pending (0)
@@ -131,7 +131,7 @@ export default function AssignedTask() {
             className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
               activeFilter === "completed"
                 ? "bg-blue-600 text-white border border-blue-600"
-                : "bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+                : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
             }`}
           >
             Completed (0)
@@ -145,16 +145,16 @@ export default function AssignedTask() {
         <div className="space-y-0">
           {filteredTasks.map((task, index) => (
             <Link key={task.id} to={`/dashboard/task/${task.id}`} className="block">
-              <div className="py-4 hover:bg-gray-50 transition-colors">
-                <p className="text-gray-500 text-xs mb-2">{task.timestamp}</p>
-                <h3 className="font-bold text-gray-900 text-sm mb-2">{task.title}</h3>
-                <p className="text-gray-900 text-sm mb-2">{task.assignee}</p>
-                <p className="text-gray-900 text-sm leading-relaxed">
+              <div className="py-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">{task.timestamp}</p>
+                <h3 className="font-bold text-gray-900 dark:text-white text-sm mb-2">{task.title}</h3>
+                <p className="text-gray-900 dark:text-gray-200 text-sm mb-2">{task.assignee}</p>
+                <p className="text-gray-900 dark:text-gray-200 text-sm leading-relaxed">
                   {task.description}
-                  <span className="text-blue-600 ml-1 cursor-pointer hover:underline">more</span>
+                  <span className="text-blue-600 dark:text-blue-400 ml-1 cursor-pointer hover:underline">more</span>
                 </p>
               </div>
-              {index < filteredTasks.length - 1 && <div className="border-t border-gray-200"></div>}
+              {index < filteredTasks.length - 1 && <div className="border-t border-gray-200 dark:border-gray-700"></div>}
             </Link>
           ))}
         </div>
@@ -164,11 +164,11 @@ export default function AssignedTask() {
       {showAssign && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowAssign(false)} />
-          <div className="relative bg-white rounded-2xl w-full max-w-4xl p-6 md:p-8 shadow-xl">
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl w-full max-w-4xl p-6 md:p-8 shadow-xl">
             <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="text-xl md:text-2xl font-bold mb-1">Assign a new task</h3>
-                <p className="text-xs text-gray-500">Fill in the following to assign task to a team member</p>
+                <h3 className="text-xl md:text-2xl font-bold mb-1 text-gray-900 dark:text-white">Assign a new task</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Fill in the following to assign task to a team member</p>
               </div>
               <button onClick={() => setShowAssign(false)} className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center hover:bg-red-200 transition-colors">✕</button>
             </div>
@@ -255,10 +255,10 @@ export default function AssignedTask() {
       {showSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-          <div className="relative bg-white rounded-2xl w-full max-w-4xl p-6 md:p-8 text-center shadow-xl">
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl w-full max-w-4xl p-6 md:p-8 text-center shadow-xl">
             <img src="/assigned-task.svg" alt="Task Assigned" className="w-48 md:w-64 mx-auto" />
-            <h3 className="text-xl md:text-2xl font-bold mt-4 md:mt-6">Task Assigned</h3>
-            <p className="text-sm md:text-base text-gray-600 mt-2 md:mt-3">You have successfully assigned task to a team member.</p>
+            <h3 className="text-xl md:text-2xl font-bold mt-4 md:mt-6 text-gray-900 dark:text-white">Task Assigned</h3>
+            <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 mt-2 md:mt-3">You have successfully assigned task to a team member.</p>
             <Link to="/dashboard/assigned-task" onClick={()=>setShowSuccess(false)} className="inline-block mt-6 md:mt-8 px-6 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">View Task</Link>
           </div>
         </div>

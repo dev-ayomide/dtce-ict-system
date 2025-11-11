@@ -29,7 +29,7 @@ export default function Notifications() {
   }
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white">Loading...</div>
   }
 
   const notifications = [
@@ -66,7 +66,7 @@ export default function Notifications() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}
@@ -94,7 +94,7 @@ export default function Notifications() {
       
       <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
         {/* Page Title */}
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Notifications</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Notifications</h1>
 
         {/* Notifications List */}
         <div className="space-y-0">
@@ -103,15 +103,15 @@ export default function Notifications() {
               <div className="flex items-start space-x-3 py-4">
                 {/* Notification Icon */}
                 <div className="flex-shrink-0 mt-1">
-                  <img src="/megaphone.svg" alt="Notification" className="w-5 h-5 text-gray-900" />
+                  <img src="/megaphone.svg" alt="Notification" className="w-5 h-5 text-gray-900 dark:text-white" />
                 </div>
 
                 {/* Notification Content */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-gray-900 text-sm leading-relaxed">
+                  <p className="text-gray-900 dark:text-white text-sm leading-relaxed">
                     {notification.message}
                   </p>
-                  <p className="text-gray-500 text-xs mt-1">
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
                     {notification.timestamp}
                   </p>
                 </div>
@@ -119,7 +119,7 @@ export default function Notifications() {
 
               {/* Divider - Show for all except last item */}
               {index < notifications.length - 1 && (
-                <div className="border-t border-gray-200"></div>
+                <div className="border-t border-gray-200 dark:border-gray-700"></div>
               )}
             </div>
           ))}

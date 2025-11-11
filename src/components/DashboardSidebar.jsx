@@ -36,7 +36,7 @@ export default function DashboardSidebar({ isOpen, onClose, user }) {
       {/* Sidebar */}
       <div
         className={`
-          fixed inset-0 z-50 bg-white flex flex-col items-center
+          fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col items-center
           transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
         `}
@@ -51,9 +51,9 @@ export default function DashboardSidebar({ isOpen, onClose, user }) {
             />
             <button
               onClick={onClose}
-              className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors"
+              className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
-              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -79,10 +79,10 @@ export default function DashboardSidebar({ isOpen, onClose, user }) {
               />
             </div>
             <div className="text-center">
-              <h3 className="text-base font-medium text-black leading-tight" style={{ fontFamily: "inherit" }}>
+              <h3 className="text-base font-medium text-black dark:text-white leading-tight" style={{ fontFamily: "inherit" }}>
                 {(user?.name || "").toUpperCase() || "USER"}
               </h3>
-              <p className="text-xs text-[#A3A3A3] mt-1" style={{ fontFamily: "inherit" }}>
+              <p className="text-xs text-[#A3A3A3] dark:text-gray-400 mt-1" style={{ fontFamily: "inherit" }}>
                 {user?.department || "ICT"}
               </p>
             </div>
@@ -100,12 +100,11 @@ export default function DashboardSidebar({ isOpen, onClose, user }) {
                   style={{ textDecoration: "none" }}
                 >
                   <div
-                    className="w-full px-4 py-2"
+                    className="w-full px-4 py-2 text-black dark:text-white"
                     style={{
                       fontFamily: "inherit",
                       fontWeight: idx === 0 ? "400" : "400",
                       fontSize: "15px",
-                      color: "#000",
                       marginBottom: idx === navigation.length - 1 ? 0 : "0.5rem",
                     }}
                   >
@@ -125,7 +124,7 @@ export default function DashboardSidebar({ isOpen, onClose, user }) {
             Report Issues
           </button>
           <button
-            className="w-10 h-10 bg-white border border-black rounded-lg flex items-center justify-center ml-2"
+            className="w-10 h-10 bg-white dark:bg-gray-800 border border-black dark:border-gray-600 rounded-lg flex items-center justify-center ml-2"
             style={{ minWidth: "2.5rem" }}
           >
             <img src="/sun.svg" alt="Sun" className="w-5 h-5" />

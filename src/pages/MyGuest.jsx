@@ -46,7 +46,7 @@ export default function MyGuest() {
   }
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white">Loading...</div>
   }
 
   const guestHistory = [
@@ -92,7 +92,7 @@ export default function MyGuest() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}
@@ -121,17 +121,17 @@ export default function MyGuest() {
       <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-2">
-          <h1 className="text-2xl font-semibold text-black mb-2">My Guest</h1>
-          <p className="text-base font-normal text-black">Generate your guest passcard</p>
+          <h1 className="text-2xl font-semibold text-black dark:text-white mb-2">My Guest</h1>
+          <p className="text-base font-normal text-black dark:text-gray-300">Generate your guest passcard</p>
         </div>
 
         {/* Form Card */}
-        <form onSubmit={handleGenerate} className="border border-[#a6a6a6] rounded-3xl p-6 md:p-8 mb-8 relative pb-6 md:pb-20">
+        <form onSubmit={handleGenerate} className="border border-[#a6a6a6] dark:border-gray-700 rounded-3xl p-6 md:p-8 mb-8 relative pb-6 md:pb-20 bg-white dark:bg-gray-800">
           <div className="flex flex-col gap-6">
             {/* Guest Name */}
             <div className="flex flex-col md:flex-row md:gap-12 items-start">
               <div className="w-full md:w-48 flex flex-col items-start md:items-center mb-2 md:mb-0">
-                <label className="font-bold text-base text-[#020202]">Guest Name</label>
+                <label className="font-bold text-base text-[#020202] dark:text-white">Guest Name</label>
               </div>
               <div className="flex-1 flex flex-col gap-2 w-full">
                 <input
@@ -139,10 +139,10 @@ export default function MyGuest() {
                   placeholder="Input your guest Name"
                   value={guestName}
                   onChange={(e) => setGuestName(e.target.value)}
-                  className="bg-[rgba(0,0,0,0.02)] border border-[#e0e0e0] h-12 rounded-xl px-4 text-sm text-[#878787] placeholder:text-[#878787] focus:outline-none w-full"
+                  className="bg-[rgba(0,0,0,0.02)] dark:bg-gray-700 border border-[#e0e0e0] dark:border-gray-600 h-12 rounded-xl px-4 text-sm text-[#878787] dark:text-gray-300 placeholder:text-[#878787] dark:placeholder:text-gray-400 focus:outline-none w-full"
                   required
                 />
-                <div className="text-xs text-[#878787]">
+                <div className="text-xs text-[#878787] dark:text-gray-400">
                   <p className="font-bold mb-0">Examples</p>
                   <p className="mb-0">- Ogunmepon Samuel</p>
                 </div>
@@ -152,7 +152,7 @@ export default function MyGuest() {
             {/* Guest Email */}
             <div className="flex flex-col md:flex-row md:gap-12 items-center">
               <div className="w-full md:w-48 flex flex-col items-start md:items-center mb-2 md:mb-0">
-                <label className="font-bold text-base text-[#020202]">Guest Email</label>
+                <label className="font-bold text-base text-[#020202] dark:text-white">Guest Email</label>
               </div>
               <div className="flex-1 w-full">
                 <input
@@ -160,7 +160,7 @@ export default function MyGuest() {
                   placeholder="Input your guest email address"
                   value={guestEmail}
                   onChange={(e) => setGuestEmail(e.target.value)}
-                  className="bg-[rgba(0,0,0,0.02)] border border-[#e0e0e0] h-12 w-full rounded-xl px-4 text-sm text-[#878787] placeholder:text-[#878787] focus:outline-none"
+                  className="bg-[rgba(0,0,0,0.02)] dark:bg-gray-700 border border-[#e0e0e0] dark:border-gray-600 h-12 w-full rounded-xl px-4 text-sm text-[#878787] dark:text-gray-300 placeholder:text-[#878787] dark:placeholder:text-gray-400 focus:outline-none"
                   required
                 />
               </div>
@@ -169,7 +169,7 @@ export default function MyGuest() {
             {/* Guest Type */}
             <div className="flex flex-col md:flex-row md:gap-12 items-center">
               <div className="w-full md:w-48 flex flex-col items-start md:items-center mb-2 md:mb-0">
-                <label className="font-bold text-base text-[#020202]">Guest type</label>
+                <label className="font-bold text-base text-[#020202] dark:text-white">Guest type</label>
               </div>
               <div className="flex-1 w-full">
                 <input
@@ -177,7 +177,7 @@ export default function MyGuest() {
                   placeholder="what type of guest is it ?"
                   value={guestType}
                   onChange={(e) => setGuestType(e.target.value)}
-                  className="bg-[rgba(0,0,0,0.02)] border border-[#e0e0e0] h-12 w-full rounded-xl px-4 text-sm text-[#878787] placeholder:text-[#878787] focus:outline-none"
+                  className="bg-[rgba(0,0,0,0.02)] dark:bg-gray-700 border border-[#e0e0e0] dark:border-gray-600 h-12 w-full rounded-xl px-4 text-sm text-[#878787] dark:text-gray-300 placeholder:text-[#878787] dark:placeholder:text-gray-400 focus:outline-none"
                   required
                 />
               </div>
@@ -191,7 +191,7 @@ export default function MyGuest() {
                   <select
                     value={region}
                     onChange={(e) => setRegion(e.target.value)}
-                    className="bg-[rgba(0,0,0,0.02)] border border-[#e0e0e0] h-12 w-full rounded-xl px-4 pr-10 text-sm text-[#878787] focus:outline-none appearance-none"
+                    className="bg-[rgba(0,0,0,0.02)] dark:bg-gray-700 border border-[#e0e0e0] dark:border-gray-600 h-12 w-full rounded-xl px-4 pr-10 text-sm text-[#878787] dark:text-gray-300 focus:outline-none appearance-none"
                     required
                   >
                     <option value="" disabled>Select Region</option>
@@ -200,7 +200,7 @@ export default function MyGuest() {
                     <option value="region44">Region 44</option>
                   </select>
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <span className="text-[#878787] text-sm rotate-90 inline-block">›</span>
+                    <span className="text-[#878787] dark:text-gray-400 text-sm rotate-90 inline-block">›</span>
                   </div>
                 </div>
                 <input
@@ -208,7 +208,7 @@ export default function MyGuest() {
                   placeholder="Province"
                   value={province}
                   onChange={(e) => setProvince(e.target.value)}
-                  className="bg-[rgba(0,0,0,0.02)] border border-[#e0e0e0] h-12 w-full rounded-xl px-4 text-sm text-[#878787] placeholder:text-[#878787] focus:outline-none"
+                  className="bg-[rgba(0,0,0,0.02)] dark:bg-gray-700 border border-[#e0e0e0] dark:border-gray-600 h-12 w-full rounded-xl px-4 text-sm text-[#878787] dark:text-gray-300 placeholder:text-[#878787] dark:placeholder:text-gray-400 focus:outline-none"
                   required
                 />
               </div>
@@ -226,7 +226,7 @@ export default function MyGuest() {
 
         {/* Guest History Section */}
         <div className="mt-8">
-          <h2 className="text-2xl font-semibold text-black mb-6">Guest History</h2>
+          <h2 className="text-2xl font-semibold text-black dark:text-white mb-6">Guest History</h2>
           
           {/* Guest History List */}
           <div className="flex flex-col gap-6">
@@ -238,7 +238,7 @@ export default function MyGuest() {
               >
                 <div className="flex flex-col gap-4">
                   <div className="flex items-start justify-between">
-                    <div className="flex flex-col gap-2 text-black">
+                    <div className="flex flex-col gap-2 text-black dark:text-white">
                       <div className="flex flex-col gap-1">
                         <h3 className="font-semibold text-lg">{guest.name}</h3>
                         <p className="font-normal text-sm">{guest.email}</p>
@@ -248,7 +248,7 @@ export default function MyGuest() {
                     
                     {/* Navigation Arrow */}
                     <div className="w-6 h-6 flex-shrink-0">
-                      <svg className="w-full h-full text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-full h-full text-black dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
@@ -256,7 +256,7 @@ export default function MyGuest() {
                   
                   {/* Divider */}
                   {index < guestHistory.length - 1 && (
-                    <div className="border-t border-gray-300"></div>
+                    <div className="border-t border-gray-300 dark:border-gray-700"></div>
                   )}
                 </div>
               </button>
@@ -276,11 +276,11 @@ export default function MyGuest() {
           />
           
           {/* Modal Card */}
-          <div className="relative bg-white rounded-3xl shadow-xl w-full max-w-4xl overflow-hidden">
+          <div className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-xl w-full max-w-4xl overflow-hidden">
             {/* Close Button */}
             <button
               onClick={() => setShowGuestModal(false)}
-              className="absolute top-4 right-4 w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition-colors z-10"
+              className="absolute top-4 right-4 w-8 h-8 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors z-10"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -303,29 +303,29 @@ export default function MyGuest() {
                 <div className="flex-1 w-full">
                   {/* Name and Email */}
                   <div className="text-center md:text-left mb-6">
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{selectedGuest.name}</h2>
-                    <p className="text-gray-600 text-sm md:text-base">{selectedGuest.email}</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1">{selectedGuest.name}</h2>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">{selectedGuest.email}</p>
                   </div>
 
                   {/* Guest Details */}
                   <div className="space-y-3 mb-6">
                     <div>
-                      <span className="text-gray-700 text-sm md:text-base">Region: </span>
-                      <span className="text-gray-900 font-medium">{selectedGuest.region}</span>
+                      <span className="text-gray-700 dark:text-gray-300 text-sm md:text-base">Region: </span>
+                      <span className="text-gray-900 dark:text-white font-medium">{selectedGuest.region}</span>
                     </div>
                     <div>
-                      <span className="text-gray-700 text-sm md:text-base">Province: </span>
-                      <span className="text-gray-900 font-medium">{selectedGuest.province}</span>
+                      <span className="text-gray-700 dark:text-gray-300 text-sm md:text-base">Province: </span>
+                      <span className="text-gray-900 dark:text-white font-medium">{selectedGuest.province}</span>
                     </div>
                     <div>
-                      <span className="text-gray-700 text-sm md:text-base">Guest Type: </span>
-                      <span className="text-gray-900 font-medium">{selectedGuest.guestType}</span>
+                      <span className="text-gray-700 dark:text-gray-300 text-sm md:text-base">Guest Type: </span>
+                      <span className="text-gray-900 dark:text-white font-medium">{selectedGuest.guestType}</span>
                     </div>
                   </div>
 
                   {/* Access Note */}
                   <div className="mb-6">
-                    <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                    <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                       <span className="font-bold">NOTE:</span> Your guest access is limited to 1 hour in the ICT department workspace.
                     </p>
                   </div>

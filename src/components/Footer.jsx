@@ -15,75 +15,61 @@ export default function Footer() {
     ]
 
     return (
-        <footer className="bg-blue-600 text-white py-12 sm:py-16 lg:py-20">
-            <div className="px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
-                {/* Logo Section */}
-                <div className="flex justify-center sm:justify-start mb-8 sm:mb-10 lg:mb-12">
-                    <img 
-                        src="/dtce-logo.svg" 
-                        alt="DTCE ICT Logo" 
-                        className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24"
-                    />
-                </div>
+        <footer className="bg-blue-600 text-white py-6 sm:py-8 lg:py-10 relative overflow-hidden">
+            {/* Background Layer */}
+            <div 
+                className="absolute inset-0 opacity-30"
+                style={{
+                    backgroundImage: 'url(/footer-layer.svg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            />
+            
+            <div className="px-4 md:px-8 lg:px-16 max-w-7xl mx-auto relative z-10">
+                {/* Logo and Quick Links on same line */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 sm:gap-8 mb-6 sm:mb-8 lg:mb-10">
+                    {/* Logo Section */}
+                    <div className="flex items-center gap-4">
+                        <img 
+                            src="/dtce-logo.svg" 
+                            alt="DTCE ICT Logo" 
+                            className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24"
+                        />
+                    </div>
 
-                {/* Quick Links */}
-                <div className="flex flex-col items-center mb-10 sm:mb-12 lg:mb-16">
-                    <ul className="space-y-4 sm:space-y-6 text-center">
-                        {quickLinks.map((link, index) => (
-                            <li key={index}>
-                                {link.isHeader ? (
-                                    <h4 className="text-lg sm:text-xl font-semibold mb-6 sm:mb-8">{link.name}</h4>
-                                ) : (
-                                    <a 
-                                        href={link.href}
-                                        className="text-white hover:text-blue-200 transition-colors text-base sm:text-lg"
-                                    >
-                                        {link.name}
-                                    </a>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                {/* Newsletter Section */}
-                <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-                    <div className="max-w-3xl mx-auto">
-                        {/* Mobile Newsletter */}
-                        <div className="sm:hidden">
-                            <input 
-                                type="email" 
-                                placeholder="Enter your Email Address"
-                                className="w-full px-4 py-3 rounded-lg border-none outline-none text-gray-700 placeholder-gray-400 text-sm mb-3"
-                            />
-                            <button className="w-full bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm">
-                                Subscribe
-                            </button>
-                        </div>
-                        
-                        <div className="hidden sm:flex rounded-full bg-white p-1.5">
-                            <input 
-                                type="email" 
-                                placeholder="Enter your Email Address"
-                                className="flex-1 px-6 lg:px-8 py-3 lg:py-4 rounded-full border-none outline-none text-gray-700 placeholder-gray-400 text-base lg:text-lg"
-                            />
-                            <button className="bg-blue-600 text-white px-6 lg:px-10 py-3 lg:py-4 rounded-full font-semibold hover:bg-blue-700 transition-colors text-base lg:text-lg">
-                                Subscribe
-                            </button>
-                        </div>
+                    {/* Quick Links */}
+                    <div className="flex flex-col items-center">
+                        <ul className="space-y-2 sm:space-y-3 text-center">
+                            {quickLinks.map((link, index) => (
+                                <li key={index}>
+                                    {link.isHeader ? (
+                                        <h4 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{link.name}</h4>
+                                    ) : (
+                                        <a 
+                                            href={link.href}
+                                            className="text-white hover:text-blue-200 transition-colors text-base sm:text-lg"
+                                        >
+                                            {link.name}
+                                        </a>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
 
                 {/* Bottom Section */}
-                <div className="border-t border-blue-500 pt-6 sm:pt-8">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
+                <div className="border-t border-blue-500 border-dotted pt-4 sm:pt-5">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
                         {/* Copyright */}
-                        <p className="text-blue-200 text-center md:text-left text-sm sm:text-base">
+                        <p className="text-blue-200 text-center text-sm sm:text-base">
                             © DTCE Techies 2025. All rights reserved
                         </p>
 
                         {/* Social Icons */}
-                        <div className="flex space-x-4 sm:space-x-6">
+                        <div className="flex space-x-3 sm:space-x-4">
                             {socialIcons.map((social, index) => (
                                 <a 
                                     key={index}

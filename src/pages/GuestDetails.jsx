@@ -35,7 +35,7 @@ export default function GuestDetails() {
   }
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white">Loading...</div>
   }
 
   // Mock guest data - in real app, fetch based on guestId
@@ -49,7 +49,7 @@ export default function GuestDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}

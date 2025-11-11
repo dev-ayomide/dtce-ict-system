@@ -88,7 +88,7 @@ export default function TaskDetails() {
   }
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white">Loading...</div>
   }
 
   // Mock task data - in real app, fetch based on taskId
@@ -105,7 +105,7 @@ export default function TaskDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}

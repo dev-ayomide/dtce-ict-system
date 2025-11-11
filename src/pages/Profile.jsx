@@ -42,7 +42,7 @@ export default function Profile() {
   }
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white">Loading...</div>
   }
 
   // Mock user data - in real app, use actual user data from auth context
@@ -55,7 +55,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}
@@ -83,7 +83,7 @@ export default function Profile() {
       
       <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
         {/* Page Title */}
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Profile</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Profile</h1>
 
         {/* Profile Section */}
         <div className="max-w-md mx-auto text-center mb-8">
@@ -96,19 +96,19 @@ export default function Profile() {
           </div>
 
           {/* Name and Role */}
-          <h2 className="text-xl font-bold text-gray-900 mb-2">TAIWO AYOMIDE</h2>
-          <p className="text-gray-600">Technical</p>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">TAIWO AYOMIDE</h2>
+          <p className="text-gray-600 dark:text-gray-300">Technical</p>
         </div>
 
         {/* Personal Information Section */}
         <div className="max-w-md mx-auto">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-bold text-gray-900">Personal Information</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Personal Information</h3>
             <button
               onClick={handleEditProfile}
-              className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors"
+              className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
-              <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
             </button>
@@ -116,29 +116,29 @@ export default function Profile() {
 
           {/* Information Fields */}
           <div className="space-y-4 mb-8">
-            <div className="flex justify-between items-center py-3 border-b border-gray-100">
-              <span className="text-gray-500 text-sm">Name</span>
-              <span className="text-gray-900 font-medium">{profileData.name}</span>
+            <div className="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-700">
+              <span className="text-gray-500 dark:text-gray-400 text-sm">Name</span>
+              <span className="text-gray-900 dark:text-white font-medium">{profileData.name}</span>
             </div>
             
-            <div className="flex justify-between items-center py-3 border-b border-gray-100">
-              <span className="text-gray-500 text-sm">Email Address</span>
-              <span className="text-gray-900 font-medium">{profileData.email}</span>
+            <div className="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-700">
+              <span className="text-gray-500 dark:text-gray-400 text-sm">Email Address</span>
+              <span className="text-gray-900 dark:text-white font-medium">{profileData.email}</span>
             </div>
             
-            <div className="flex justify-between items-center py-3 border-b border-gray-100">
-              <span className="text-gray-500 text-sm">Province</span>
-              <span className="text-gray-900 font-medium">{profileData.province}</span>
+            <div className="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-700">
+              <span className="text-gray-500 dark:text-gray-400 text-sm">Province</span>
+              <span className="text-gray-900 dark:text-white font-medium">{profileData.province}</span>
             </div>
             
-            <div className="flex justify-between items-center py-3 border-b border-gray-100">
-              <span className="text-gray-500 text-sm">Region</span>
-              <span className="text-gray-900 font-medium">{profileData.region}</span>
+            <div className="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-700">
+              <span className="text-gray-500 dark:text-gray-400 text-sm">Region</span>
+              <span className="text-gray-900 dark:text-white font-medium">{profileData.region}</span>
             </div>
             
-            <div className="flex justify-between items-center py-3 border-b border-gray-100">
-              <span className="text-gray-500 text-sm">Subunit</span>
-              <span className="text-gray-900 font-medium">{profileData.subunit}</span>
+            <div className="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-700">
+              <span className="text-gray-500 dark:text-gray-400 text-sm">Subunit</span>
+              <span className="text-gray-900 dark:text-white font-medium">{profileData.subunit}</span>
             </div>
           </div>
 

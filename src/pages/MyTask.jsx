@@ -30,7 +30,7 @@ export default function MyTask() {
   }
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center text-gray-900 dark:text-white">Loading...</div>
   }
 
   const tasks = [
@@ -90,7 +90,7 @@ export default function MyTask() {
   const filteredTasks = getFilteredTasks()
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}
@@ -118,7 +118,7 @@ export default function MyTask() {
       
       <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
         {/* Page Title */}
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">My Task</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">My Task</h1>
 
         {/* Task Filters */}
         <div className="flex justify-center space-x-2 mb-6">
@@ -127,7 +127,7 @@ export default function MyTask() {
             className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
               activeFilter === "all"
                 ? "bg-blue-600 text-white border border-blue-600"
-                : "bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+                : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
             }`}
           >
             All ({tasks.length})
@@ -137,7 +137,7 @@ export default function MyTask() {
             className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
               activeFilter === "pending"
                 ? "bg-blue-600 text-white border border-blue-600"
-                : "bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+                : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
             }`}
           >
             Pending (0)
@@ -147,7 +147,7 @@ export default function MyTask() {
             className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
               activeFilter === "completed"
                 ? "bg-blue-600 text-white border border-blue-600"
-                : "bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+                : "bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
             }`}
           >
             Completed (0)
@@ -158,26 +158,26 @@ export default function MyTask() {
         <div className="space-y-0">
           {filteredTasks.map((task, index) => (
             <Link key={task.id} to={`/dashboard/task/${task.id}`} className="block">
-              <div className="py-4 hover:bg-gray-50 transition-colors">
+              <div className="py-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                 {/* Timestamp */}
-                <p className="text-gray-500 text-xs mb-2">{task.timestamp}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">{task.timestamp}</p>
                 
                 {/* Task Title */}
-                <h3 className="font-bold text-gray-900 text-sm mb-2">{task.title}</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white text-sm mb-2">{task.title}</h3>
                 
                 {/* Assignee */}
-                <p className="text-gray-900 text-sm mb-2">{task.assignee}</p>
+                <p className="text-gray-900 dark:text-gray-200 text-sm mb-2">{task.assignee}</p>
                 
                 {/* Description */}
-                <p className="text-gray-900 text-sm leading-relaxed">
+                <p className="text-gray-900 dark:text-gray-200 text-sm leading-relaxed">
                   {task.description}
-                  <span className="text-blue-600 ml-1 cursor-pointer hover:underline">more</span>
+                  <span className="text-blue-600 dark:text-blue-400 ml-1 cursor-pointer hover:underline">more</span>
                 </p>
               </div>
               
               {/* Divider - Show for all except last item */}
               {index < filteredTasks.length - 1 && (
-                <div className="border-t border-gray-200"></div>
+                <div className="border-t border-gray-200 dark:border-gray-700"></div>
               )}
             </Link>
           ))}
