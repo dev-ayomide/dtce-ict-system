@@ -170,20 +170,20 @@ export default function AssignedTask() {
                 <h3 className="text-xl md:text-2xl font-bold mb-1 text-gray-900 dark:text-white">Assign a new task</h3>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Fill in the following to assign task to a team member</p>
               </div>
-              <button onClick={() => setShowAssign(false)} className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center hover:bg-red-200 transition-colors">✕</button>
+              <button onClick={() => setShowAssign(false)} className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors">✕</button>
             </div>
 
             <div className="space-y-5 max-h-[70vh] overflow-y-auto pr-2 mt-6">
               <div>
-                <label className="block text-sm font-medium mb-2">Who do you want to assign this task to?</label>
+                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">Who do you want to assign this task to?</label>
                 <div className="relative">
-                  <select value={form.member} onChange={e=>setForm({...form, member:e.target.value})} className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50 appearance-none pr-10">
+                  <select value={form.member} onChange={e=>setForm({...form, member:e.target.value})} className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white appearance-none pr-10">
                     <option value="">Select team member</option>
                     <option>GEORGE OGUNS</option>
                     <option>AYOMIDE OGUNS</option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -191,22 +191,22 @@ export default function AssignedTask() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Task title</label>
-                <p className="text-xs text-gray-500 mb-2">Create a strong task title</p>
-                <input value={form.title} onChange={e=>setForm({...form, title:e.target.value})} placeholder="UI team dashboard screen debugging" className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50" />
+                <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-white">Task title</label>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Create a strong task title</p>
+                <input value={form.title} onChange={e=>setForm({...form, title:e.target.value})} placeholder="UI team dashboard screen debugging" className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400" />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Description</label>
-                <p className="text-xs text-gray-500 mb-2">Provide a brief and concise task description</p>
-                <div className="rounded-lg overflow-hidden bg-gray-50">
-                  <textarea value={form.description} onChange={e=>setForm({...form, description:e.target.value})} rows={6} className="w-full p-3 text-sm resize-none focus:outline-none bg-transparent" placeholder="Enter Description here..." />
-                  <div className="border-t border-gray-200 px-3 py-2 flex items-center gap-3 bg-gray-50">
-                    <button type="button" className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded text-gray-600 font-bold text-sm">B</button>
-                    <button type="button" className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded text-gray-600 italic text-sm">I</button>
-                    <button type="button" className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded text-gray-600 underline text-sm">U</button>
-                    <div className="w-px h-4 bg-gray-300"></div>
-                    <button type="button" className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 rounded text-gray-600">
+                <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-white">Description</label>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Provide a brief and concise task description</p>
+                <div className="rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
+                  <textarea value={form.description} onChange={e=>setForm({...form, description:e.target.value})} rows={6} className="w-full p-3 text-sm resize-none focus:outline-none bg-transparent text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400" placeholder="Enter Description here..." />
+                  <div className="border-t border-gray-200 dark:border-gray-600 px-3 py-2 flex items-center gap-3 bg-gray-50 dark:bg-gray-700">
+                    <button type="button" className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-gray-600 dark:text-gray-300 font-bold text-sm">B</button>
+                    <button type="button" className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-gray-600 dark:text-gray-300 italic text-sm">I</button>
+                    <button type="button" className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-gray-600 dark:text-gray-300 underline text-sm">U</button>
+                    <div className="w-px h-4 bg-gray-300 dark:bg-gray-600"></div>
+                    <button type="button" className="w-6 h-6 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-gray-600 dark:text-gray-300">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 6h13M8 12h13m-13 6h13M3 6h.01M3 12h.01M3 18h.01" />
                       </svg>
@@ -216,15 +216,15 @@ export default function AssignedTask() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2">Task duration/Deadline</label>
+                <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">Task duration/Deadline</label>
                 <div className="relative">
-                  <select value={form.duration} onChange={e=>setForm({...form, duration:e.target.value})} className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50 appearance-none pr-10">
+                  <select value={form.duration} onChange={e=>setForm({...form, duration:e.target.value})} className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white appearance-none pr-10">
                     <option value="">Select duration</option>
                     <option>3 Hours</option>
                     <option>1 Day</option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -232,14 +232,14 @@ export default function AssignedTask() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Files</label>
-                <p className="text-xs text-gray-500 mb-2">Choose required fields</p>
-                <div className="w-full h-32 rounded-xl flex flex-col items-center justify-center text-xs text-gray-500 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
-                  <svg className="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-white">Files</label>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Choose required fields</p>
+                <div className="w-full h-32 rounded-xl flex flex-col items-center justify-center text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors cursor-pointer">
+                  <svg className="w-12 h-12 text-gray-400 dark:text-gray-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                   <p className="font-medium">Select or Drop file</p>
-                  <p className="text-gray-400 mt-1">Max 100mb</p>
+                  <p className="text-gray-400 dark:text-gray-500 mt-1">Max 100mb</p>
                 </div>
               </div>
             </div>

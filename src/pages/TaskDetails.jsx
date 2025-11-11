@@ -239,11 +239,11 @@ export default function TaskDetails() {
       {showUpdateModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowUpdateModal(false)} />
-          <div className="relative bg-white rounded-2xl w-full max-w-4xl p-6 md:p-8 shadow-xl">
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl w-full max-w-4xl p-6 md:p-8 shadow-xl">
             {/* Close Button */}
             <button
               onClick={() => setShowUpdateModal(false)}
-              className="absolute top-4 right-4 w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition-colors"
+              className="absolute top-4 right-4 w-8 h-8 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -254,8 +254,8 @@ export default function TaskDetails() {
             <div className="space-y-6">
               {/* Title */}
               <div>
-                <h3 className="text-xl md:text-2xl font-bold text-black mb-2">Update Task Status?</h3>
-                <p className="text-sm text-gray-600">
+                <h3 className="text-xl md:text-2xl font-bold text-black dark:text-white mb-2">Update Task Status?</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   To update task status to "COMPLETED" you will need to upload a proof that you've got the task done.
                 </p>
               </div>
@@ -264,7 +264,7 @@ export default function TaskDetails() {
               <div
                 onDrop={handleFileDrop}
                 onDragOver={(e) => e.preventDefault()}
-                className="rounded-xl p-8 md:p-12 text-center cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors"
+                className="rounded-xl p-8 md:p-12 text-center cursor-pointer bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
               >
                 <input
                   type="file"
@@ -276,14 +276,14 @@ export default function TaskDetails() {
                 />
                 <label htmlFor="file-upload" className="cursor-pointer">
                   <div className="flex flex-col items-center space-y-3">
-                    <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
-                      <svg className="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-16 h-16 bg-gray-100 dark:bg-gray-600 rounded-lg flex items-center justify-center">
+                      <svg className="w-8 h-8 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">Select or Drop File</p>
-                      <p className="text-xs text-gray-500 mt-1">Max size of 5MB</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">Select or Drop File</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Max size of 5MB</p>
                     </div>
                   </div>
                 </label>
@@ -292,18 +292,18 @@ export default function TaskDetails() {
               {/* Uploaded Files List */}
               {uploadedFiles.length > 0 && (
                 <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">Uploaded Files:</h4>
+                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Uploaded Files:</h4>
                   {uploadedFiles.map((file, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors border border-gray-200 dark:border-gray-600">
                       <div className="flex items-center space-x-3 flex-1 min-w-0">
-                        <svg className="w-5 h-5 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        <span className="text-sm text-blue-600 truncate">{file.name}</span>
+                        <span className="text-sm text-blue-600 dark:text-blue-400 truncate">{file.name}</span>
                       </div>
                       <button
                         onClick={() => handleFileRemove(index)}
-                        className="ml-2 text-red-500 hover:text-red-700 p-1"
+                        className="ml-2 text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 p-1"
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
