@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import DashboardNavbar from "../components/DashboardNavbar"
 import DashboardSidebar from "../components/DashboardSidebar"
+import ProfilePanel from "../components/ProfilePanel"
+import Footer from "../components/Footer"
 
 export default function SubunitHub() {
   const [user, setUser] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [query, setQuery] = useState("")
   const [showAddModal, setShowAddModal] = useState(false)
   const [showMemberModal, setShowMemberModal] = useState(false)
@@ -53,12 +56,25 @@ export default function SubunitHub() {
       <DashboardNavbar
         user={user}
         onLogout={handleLogout}
-        onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        onMenuToggle={() => {
+          setIsProfileOpen(false)
+          setIsSidebarOpen(!isSidebarOpen)
+        }}
+        onProfileToggle={() => {
+          setIsSidebarOpen(false)
+          setIsProfileOpen(!isProfileOpen)
+        }}
       />
 
       <DashboardSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} user={user} />
+      
+      <ProfilePanel 
+        isOpen={isProfileOpen} 
+        onClose={() => setIsProfileOpen(false)}
+        user={user}
+      />
 
-      <main className="p-4">
+      <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Sub Unit Hub</h1>
 
         <div className="mb-4">
@@ -171,6 +187,7 @@ export default function SubunitHub() {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   )
 }

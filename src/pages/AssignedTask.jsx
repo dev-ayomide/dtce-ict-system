@@ -3,10 +3,13 @@ import { useNavigate, Link, useLocation } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import DashboardNavbar from "../components/DashboardNavbar"
 import DashboardSidebar from "../components/DashboardSidebar"
+import ProfilePanel from "../components/ProfilePanel"
+import Footer from "../components/Footer"
 
 export default function AssignedTask() {
   const [user, setUser] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [activeFilter, setActiveFilter] = useState("all")
   const [showAssign, setShowAssign] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
@@ -81,12 +84,25 @@ export default function AssignedTask() {
       <DashboardNavbar
         user={user}
         onLogout={handleLogout}
-        onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        onMenuToggle={() => {
+          setIsProfileOpen(false)
+          setIsSidebarOpen(!isSidebarOpen)
+        }}
+        onProfileToggle={() => {
+          setIsSidebarOpen(false)
+          setIsProfileOpen(!isProfileOpen)
+        }}
       />
 
       <DashboardSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} user={user} />
+      
+      <ProfilePanel 
+        isOpen={isProfileOpen} 
+        onClose={() => setIsProfileOpen(false)}
+        user={user}
+      />
 
-      <main className="p-4">
+      <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Assigned Task</h1>
 
         <div className="flex justify-center space-x-2 mb-6">
@@ -210,6 +226,7 @@ export default function AssignedTask() {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   )
 }

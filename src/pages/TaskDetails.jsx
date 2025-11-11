@@ -3,12 +3,17 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import DashboardNavbar from "../components/DashboardNavbar"
 import DashboardSidebar from "../components/DashboardSidebar"
+import ProfilePanel from "../components/ProfilePanel"
+import Footer from "../components/Footer"
 
 export default function TaskDetails() {
   const [user, setUser] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [taskStatus, setTaskStatus] = useState("not-started")
   const [timeLeft, setTimeLeft] = useState({ hours: 3, minutes: 45, seconds: 0 })
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
+  const [uploadedFiles, setUploadedFiles] = useState([])
   const navigate = useNavigate()
   const { user: authUser, logout } = useAuth()
   const { taskId } = useParams()
@@ -48,9 +53,38 @@ export default function TaskDetails() {
   }
 
   const handleStatusUpdate = (status) => {
-    setTaskStatus(status)
-    // Handle status update logic here
-    console.log("Task status updated to:", status)
+    if (status === "completed") {
+      setShowUpdateModal(true)
+    } else {
+      setTaskStatus(status)
+      // Handle status update logic here
+      console.log("Task status updated to:", status)
+    }
+  }
+
+  const handleFileUpload = (e) => {
+    const files = Array.from(e.target.files)
+    const validFiles = files.filter(file => file.size <= 5 * 1024 * 1024) // 5MB limit
+    setUploadedFiles(prev => [...prev, ...validFiles])
+  }
+
+  const handleFileDrop = (e) => {
+    e.preventDefault()
+    const files = Array.from(e.dataTransfer.files)
+    const validFiles = files.filter(file => file.size <= 5 * 1024 * 1024) // 5MB limit
+    setUploadedFiles(prev => [...prev, ...validFiles])
+  }
+
+  const handleFileRemove = (index) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index))
+  }
+
+  const handleSubmit = () => {
+    // Handle submit logic here
+    console.log("Submitting task completion with files:", uploadedFiles)
+    setTaskStatus("completed")
+    setShowUpdateModal(false)
+    setUploadedFiles([])
   }
 
   if (!user) {
@@ -75,7 +109,14 @@ export default function TaskDetails() {
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}
-        onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        onMenuToggle={() => {
+          setIsProfileOpen(false)
+          setIsSidebarOpen(!isSidebarOpen)
+        }}
+        onProfileToggle={() => {
+          setIsSidebarOpen(false)
+          setIsProfileOpen(!isProfileOpen)
+        }}
       />
       
       <DashboardSidebar 
@@ -84,7 +125,13 @@ export default function TaskDetails() {
         user={user}
       />
       
-      <main className="p-4 space-y-6">
+      <ProfilePanel 
+        isOpen={isProfileOpen} 
+        onClose={() => setIsProfileOpen(false)}
+        user={user}
+      />
+      
+      <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto space-y-6">
         {/* Page Title */}
         <h1 className="text-2xl font-bold text-gray-900">Task details</h1>
 
@@ -186,6 +233,97 @@ export default function TaskDetails() {
           </div>
         </div>
       </main>
+      <Footer />
+
+      {/* Update Task Status Modal */}
+      {showUpdateModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setShowUpdateModal(false)} />
+          <div className="relative bg-white rounded-2xl w-[92%] max-w-md p-5 shadow-xl">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowUpdateModal(false)}
+              className="absolute top-4 right-4 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+            >
+              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Modal Content */}
+            <div className="space-y-4">
+              {/* Title */}
+              <h3 className="text-xl font-bold text-black pr-8">Update Task Status?</h3>
+              
+              {/* Description */}
+              <p className="text-sm text-black">
+                To update task status to "COMPLETED" you will need to upload a proof that you've got the task done.
+              </p>
+
+              {/* File Upload Area */}
+              <div
+                onDrop={handleFileDrop}
+                onDragOver={(e) => e.preventDefault()}
+                className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition-colors"
+              >
+                <input
+                  type="file"
+                  id="file-upload"
+                  multiple
+                  onChange={handleFileUpload}
+                  className="hidden"
+                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                />
+                <label htmlFor="file-upload" className="cursor-pointer">
+                  <div className="flex flex-col items-center space-y-2">
+                    <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">Select or Drop File</p>
+                      <p className="text-xs text-gray-500 mt-1">Max size of 5MB</p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              {/* Uploaded Files List */}
+              {uploadedFiles.length > 0 && (
+                <div className="space-y-2">
+                  {uploadedFiles.map((file, index) => (
+                    <div key={index} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
+                      <div className="flex items-center space-x-2 flex-1 min-w-0">
+                        <svg className="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span className="text-sm text-blue-600 truncate">{file.name}</span>
+                      </div>
+                      <button
+                        onClick={() => handleFileRemove(index)}
+                        className="ml-2 text-red-500 hover:text-red-700"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Submit Button */}
+              <button
+                onClick={handleSubmit}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

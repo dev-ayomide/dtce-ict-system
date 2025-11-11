@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import DashboardNavbar from "../components/DashboardNavbar"
 import DashboardSidebar from "../components/DashboardSidebar"
+import ProfilePanel from "../components/ProfilePanel"
+import Footer from "../components/Footer"
 
 export default function Profile() {
   const [user, setUser] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const navigate = useNavigate()
   const { user: authUser, logout } = useAuth()
@@ -56,7 +59,14 @@ export default function Profile() {
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}
-        onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        onMenuToggle={() => {
+          setIsProfileOpen(false)
+          setIsSidebarOpen(!isSidebarOpen)
+        }}
+        onProfileToggle={() => {
+          setIsSidebarOpen(false)
+          setIsProfileOpen(!isProfileOpen)
+        }}
       />
       
       <DashboardSidebar 
@@ -65,7 +75,13 @@ export default function Profile() {
         user={user}
       />
       
-      <main className="p-4">
+      <ProfilePanel 
+        isOpen={isProfileOpen} 
+        onClose={() => setIsProfileOpen(false)}
+        user={user}
+      />
+      
+      <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
         {/* Page Title */}
         <h1 className="text-2xl font-bold text-gray-900 mb-6">Profile</h1>
 
@@ -135,6 +151,7 @@ export default function Profile() {
           </button>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

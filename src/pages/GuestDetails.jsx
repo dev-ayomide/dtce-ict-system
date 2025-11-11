@@ -3,10 +3,13 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import DashboardNavbar from "../components/DashboardNavbar"
 import DashboardSidebar from "../components/DashboardSidebar"
+import ProfilePanel from "../components/ProfilePanel"
+import Footer from "../components/Footer"
 
 export default function GuestDetails() {
   const [user, setUser] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
   const navigate = useNavigate()
   const { user: authUser, logout } = useAuth()
   const { guestId } = useParams()
@@ -50,15 +53,29 @@ export default function GuestDetails() {
       <DashboardNavbar 
         user={user} 
         onLogout={handleLogout}
-        onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        onMenuToggle={() => {
+          setIsProfileOpen(false)
+          setIsSidebarOpen(!isSidebarOpen)
+        }}
+        onProfileToggle={() => {
+          setIsSidebarOpen(false)
+          setIsProfileOpen(!isProfileOpen)
+        }}
       />
       
       <DashboardSidebar 
         isOpen={isSidebarOpen} 
         onClose={() => setIsSidebarOpen(false)}
+        user={user}
       />
       
-      <main className="p-4">
+      <ProfilePanel 
+        isOpen={isProfileOpen} 
+        onClose={() => setIsProfileOpen(false)}
+        user={user}
+      />
+      
+      <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto">
         {/* Guest Passcard */}
         <div className="max-w-md mx-auto bg-white rounded-t-3xl shadow-lg border border-gray-200 overflow-hidden">
           {/* Profile Picture Section */}
@@ -120,6 +137,7 @@ export default function GuestDetails() {
           </button>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }
