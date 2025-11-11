@@ -271,70 +271,74 @@ export default function MyGuest() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Overlay */}
           <div 
-            className="absolute inset-0 bg-black/40" 
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm" 
             onClick={() => setShowGuestModal(false)}
           />
           
           {/* Modal Card */}
-          <div className="relative bg-white rounded-3xl shadow-xl w-full max-w-md overflow-hidden">
+          <div className="relative bg-white rounded-3xl shadow-xl w-full max-w-4xl overflow-hidden">
             {/* Close Button */}
             <button
               onClick={() => setShowGuestModal(false)}
-              className="absolute top-4 right-4 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors z-10"
+              className="absolute top-4 right-4 w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center hover:bg-red-200 transition-colors z-10"
             >
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            {/* Profile Picture */}
-            <div className="flex justify-center pt-8 pb-4">
-              <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center overflow-hidden">
-                {/* Placeholder Avatar - Replace with actual image */}
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                  {selectedGuest.name.charAt(0)}
+            <div className="p-6 md:p-8">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
+                {/* Profile Picture */}
+                <div className="flex-shrink-0">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-blue-100 flex items-center justify-center overflow-hidden">
+                    {/* Placeholder Avatar - Replace with actual image */}
+                    <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-3xl md:text-4xl font-bold">
+                      {selectedGuest.name.charAt(0)}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Guest Information */}
+                <div className="flex-1 w-full">
+                  {/* Name and Email */}
+                  <div className="text-center md:text-left mb-6">
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{selectedGuest.name}</h2>
+                    <p className="text-gray-600 text-sm md:text-base">{selectedGuest.email}</p>
+                  </div>
+
+                  {/* Guest Details */}
+                  <div className="space-y-3 mb-6">
+                    <div>
+                      <span className="text-gray-700 text-sm md:text-base">Region: </span>
+                      <span className="text-gray-900 font-medium">{selectedGuest.region}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-700 text-sm md:text-base">Province: </span>
+                      <span className="text-gray-900 font-medium">{selectedGuest.province}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-700 text-sm md:text-base">Guest Type: </span>
+                      <span className="text-gray-900 font-medium">{selectedGuest.guestType}</span>
+                    </div>
+                  </div>
+
+                  {/* Access Note */}
+                  <div className="mb-6">
+                    <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                      <span className="font-bold">NOTE:</span> Your guest access is limited to 1 hour in the ICT department workspace.
+                    </p>
+                  </div>
+
+                  {/* Print Passcard Button */}
+                  <button
+                    onClick={handlePrintPasscard}
+                    className="w-full md:w-auto md:px-8 bg-[#0153fd] text-white py-3 px-6 rounded-xl font-semibold hover:bg-[#0144d4] focus:outline-none focus:ring-2 focus:ring-[#0153fd] focus:ring-offset-2 transition-colors"
+                  >
+                    Print Passcard
+                  </button>
                 </div>
               </div>
-            </div>
-
-            {/* Guest Information */}
-            <div className="px-6 pb-6">
-              {/* Name and Email */}
-              <div className="text-center mb-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-1">{selectedGuest.name}</h2>
-                <p className="text-gray-600 text-sm">{selectedGuest.email}</p>
-              </div>
-
-              {/* Guest Details */}
-              <div className="space-y-3 mb-6 text-center">
-                <div>
-                  <span className="text-gray-700">Region: </span>
-                  <span className="text-gray-900 font-medium">{selectedGuest.region}</span>
-                </div>
-                <div>
-                  <span className="text-gray-700">Province: </span>
-                  <span className="text-gray-900 font-medium">{selectedGuest.province}</span>
-                </div>
-                <div>
-                  <span className="text-gray-700">Guest Type: </span>
-                  <span className="text-gray-900 font-medium">{selectedGuest.guestType}</span>
-                </div>
-              </div>
-
-              {/* Access Note */}
-              <div className="mb-6">
-                <p className="text-sm text-gray-700 leading-relaxed text-center">
-                  <span className="font-bold">NOTE:</span> Your guest access is limited to 1 hour in the ICT department workspace.
-                </p>
-              </div>
-
-              {/* Print Passcard Button */}
-              <button
-                onClick={handlePrintPasscard}
-                className="w-full bg-[#0153fd] text-white py-3 px-6 rounded-xl font-semibold hover:bg-[#0144d4] focus:outline-none focus:ring-2 focus:ring-[#0153fd] focus:ring-offset-2 transition-colors"
-              >
-                Print Passcard
-              </button>
             </div>
           </div>
         </div>

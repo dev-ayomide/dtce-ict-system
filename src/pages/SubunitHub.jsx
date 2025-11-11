@@ -119,49 +119,58 @@ export default function SubunitHub() {
 
       {/* Add User Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/40" onClick={()=>setShowAddModal(false)} />
-          <div className="relative bg-white rounded-2xl w-[92%] max-w-md p-5 shadow-xl">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xl font-bold">Add a user to your Sub unit</h3>
-              <button onClick={()=>setShowAddModal(false)} className="w-8 h-8 rounded-full bg-gray-100">✕</button>
-            </div>
-            <p className="text-xs text-gray-500 mb-4">Fill in the following details to add to new team member</p>
-
-            <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setShowAddModal(false)} />
+          <div className="relative bg-white rounded-2xl w-full max-w-4xl p-6 md:p-8 shadow-xl">
+            <div className="flex items-start justify-between mb-3">
               <div>
-                <label className="block text-sm font-medium mb-1">First Name</label>
-                <input value={form.firstName} onChange={e=>setForm({...form, firstName:e.target.value})} placeholder="Enter user first name" className="w-full border rounded-lg h-10 px-3 text-sm bg-gray-50" />
+                <h3 className="text-xl md:text-2xl font-bold mb-1">Add a user to your Sub unit</h3>
+                <p className="text-xs text-gray-500">Fill in the following details to add to new team member</p>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Last Name</label>
-                <input value={form.lastName} onChange={e=>setForm({...form, lastName:e.target.value})} placeholder="Enter user last name" className="w-full border rounded-lg h-10 px-3 text-sm bg-gray-50" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Gender</label>
-                <select value={form.gender} onChange={e=>setForm({...form, gender:e.target.value})} className="w-full border rounded-lg h-10 px-3 text-sm bg-gray-50">
-                  <option value="">Select gender</option>
-                  <option>MALE</option>
-                  <option>FEMALE</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Email Address</label>
-                <input value={form.email} onChange={e=>setForm({...form, email:e.target.value})} placeholder="Enter user email address" className="w-full border rounded-lg h-10 px-3 text-sm bg-gray-50" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Phone Number</label>
-                <input value={form.phone} onChange={e=>setForm({...form, phone:e.target.value})} placeholder="Enter user phone number" className="w-full border rounded-lg h-10 px-3 text-sm bg-gray-50" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Role</label>
-                <input value={form.role} onChange={e=>setForm({...form, role:e.target.value})} placeholder="Enter user role" className="w-full border rounded-lg h-10 px-3 text-sm bg-gray-50" />
-              </div>
+              <button onClick={()=>setShowAddModal(false)} className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center hover:bg-red-200 transition-colors">✕</button>
             </div>
 
-            <div className="mt-4 flex gap-2">
-              <button onClick={()=>setShowAddModal(false)} className="flex-1 h-10 bg-blue-600 text-white rounded-lg text-sm">Add User</button>
-              <button onClick={()=>setShowAddModal(false)} className="h-10 px-4 border rounded-lg text-sm">Cancel</button>
+            <div className="space-y-5 max-h-[70vh] overflow-y-auto pr-2 mt-6">
+              <div>
+                <label className="block text-sm font-medium mb-2">First Name</label>
+                <input value={form.firstName} onChange={e=>setForm({...form, firstName:e.target.value})} placeholder="Enter user first name" className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Last Name</label>
+                <input value={form.lastName} onChange={e=>setForm({...form, lastName:e.target.value})} placeholder="Enter user last name" className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Gender</label>
+                <div className="relative">
+                  <select value={form.gender} onChange={e=>setForm({...form, gender:e.target.value})} className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50 appearance-none pr-10">
+                    <option value="">Select gender</option>
+                    <option>MALE</option>
+                    <option>FEMALE</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Email Address</label>
+                <input value={form.email} onChange={e=>setForm({...form, email:e.target.value})} placeholder="Enter user email address" className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Phone Number</label>
+                <input value={form.phone} onChange={e=>setForm({...form, phone:e.target.value})} placeholder="Enter user phone number" className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Role</label>
+                <input value={form.role} onChange={e=>setForm({...form, role:e.target.value})} placeholder="Enter user role" className="w-full rounded-lg h-10 px-3 text-sm bg-gray-50" />
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button onClick={()=>setShowAddModal(false)} className="h-10 px-4 border rounded-lg text-sm hover:bg-gray-50 transition-colors">Cancel</button>
+              <button onClick={()=>setShowAddModal(false)} className="h-10 px-6 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">Add User</button>
             </div>
           </div>
         </div>
@@ -169,21 +178,37 @@ export default function SubunitHub() {
 
       {/* Member Details Modal */}
       {showMemberModal && selectedMember && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/40" onClick={()=>setShowMemberModal(false)} />
-          <div className="relative bg-white rounded-2xl w-[92%] max-w-sm p-6 text-center">
-            <button onClick={()=>setShowMemberModal(false)} className="absolute right-4 top-4 w-8 h-8 rounded-full bg-gray-100">✕</button>
-            <img src={selectedMember.avatar} alt="avatar" className="w-20 h-20 rounded-full mx-auto" />
-            <h3 className="text-base font-bold mt-3">{selectedMember.name}</h3>
-            <p className="text-xs text-gray-500">{selectedMember.gender}</p>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setShowMemberModal(false)} />
+          <div className="relative bg-white rounded-2xl w-full max-w-4xl p-6 md:p-8 shadow-xl">
+            <button onClick={()=>setShowMemberModal(false)} className="absolute right-4 top-4 w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center hover:bg-red-200 transition-colors">✕</button>
+            
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
+              <div className="flex-shrink-0 text-center md:text-left">
+                <img src={selectedMember.avatar} alt="avatar" className="w-24 h-24 md:w-32 md:h-32 rounded-full mx-auto md:mx-0" />
+                <h3 className="text-lg md:text-xl font-bold mt-3">{selectedMember.name}</h3>
+                <p className="text-sm text-gray-500">{selectedMember.gender}</p>
+              </div>
 
-            <div className="text-left mt-5 space-y-3">
-              <div><span className="font-medium">Role: </span><span className="text-gray-700">{selectedMember.role}</span></div>
-              <div className="break-words"><span className="font-medium">Email: </span><span className="text-gray-700">{selectedMember.email}</span></div>
-              <div><span className="font-medium">Phone Number: </span><span className="text-gray-700">{selectedMember.phone}</span></div>
+              <div className="flex-1 w-full">
+                <div className="space-y-4">
+                  <div>
+                    <span className="font-medium text-sm text-gray-700">Role: </span>
+                    <span className="text-gray-900">{selectedMember.role}</span>
+                  </div>
+                  <div className="break-words">
+                    <span className="font-medium text-sm text-gray-700">Email: </span>
+                    <span className="text-gray-900">{selectedMember.email}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium text-sm text-gray-700">Phone Number: </span>
+                    <span className="text-gray-900">{selectedMember.phone}</span>
+                  </div>
+                </div>
+
+                <button onClick={()=>{ setShowMemberModal(false); navigate('/dashboard/assigned-task', { state: { member: selectedMember.name } }); }} className="mt-6 w-full md:w-auto md:px-8 h-10 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">Assign Task</button>
+              </div>
             </div>
-
-            <button onClick={()=>{ setShowMemberModal(false); navigate('/dashboard/assigned-task', { state: { member: selectedMember.name } }); }} className="mt-6 w-full h-10 bg-blue-600 text-white rounded-lg text-sm">Assign Task</button>
           </div>
         </div>
       )}

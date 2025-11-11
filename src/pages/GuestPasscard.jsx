@@ -131,10 +131,10 @@ export default function GuestPasscard() {
           </button>
 
           <button
-            onClick={() => navigate(`/dashboard/guest/${guestId}`)}
+            onClick={() => navigate("/dashboard/my-guest")}
             className="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
           >
-            Back to Guest Details
+            Back to Guest Page
           </button>
         </div>
       </main>
