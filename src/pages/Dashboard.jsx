@@ -89,7 +89,7 @@ export default function Dashboard() {
         user={user}
       />
       
-      <main className="px-4 md:px-8 lg:px-16 pt-20 pb-4 md:pb-8 max-w-7xl mx-auto space-y-6">
+      <main className="px-4 md:px-8 lg:px-16 pt-24 pb-4 md:pb-8 max-w-7xl mx-auto space-y-6">
         {/* Logo and Greeting Section */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">

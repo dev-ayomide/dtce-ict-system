@@ -29,9 +29,9 @@ export default function Footer() {
             
             <div className="px-4 md:px-8 lg:px-16 max-w-7xl mx-auto relative z-10">
                 {/* Logo and Quick Links on same line */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 sm:gap-8 mb-6 sm:mb-8 lg:mb-10">
+                <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 mb-6 sm:mb-8 lg:mb-10 relative">
                     {/* Logo Section */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 sm:absolute sm:left-0">
                         <img 
                             src="/dtce-logo.svg" 
                             alt="DTCE ICT Logo" 
@@ -39,8 +39,8 @@ export default function Footer() {
                         />
                     </div>
 
-                    {/* Quick Links */}
-                    <div className="flex flex-col items-center">
+                    {/* Quick Links - Centered */}
+                    <div className="flex flex-col items-center flex-1">
                         <ul className="space-y-2 sm:space-y-3 text-center">
                             {quickLinks.map((link, index) => (
                                 <li key={index}>
