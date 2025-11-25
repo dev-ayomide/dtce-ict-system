@@ -1,6 +1,6 @@
 # DTCE ICT System
 
-A comprehensive ICT management system for the DTCE (Department of Technical and Computer Education) department, built with React and Vite. This system manages tasks, guest passes, attendance tracking, and subunit coordination.
+A comprehensive ICT management system for the DTCE department, built with React and Vite. This system manages tasks, guest passes, attendance tracking, and subunit coordination.
 
 ## 📋 Table of Contents
 
