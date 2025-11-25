@@ -262,7 +262,6 @@ dtce-ict-system/
 ### ⚠️ IMPORTANT: Code Comments
 
 **CRITICAL INSTRUCTION**: 
-- **DO NOT** modify or remove existing comments in the codebase
 - **ALWAYS** read comments before writing new code
 - Comments contain important context, explanations, and instructions
 - If you need to understand a section, read the comments first
@@ -401,9 +400,7 @@ When working on this project:
 1. Read all comments in the codebase before making changes
 2. Follow the existing code style
 3. Test your changes thoroughly
-4. Update documentation if needed
-5. Ensure responsive design works on all screen sizes
-6. Test dark mode functionality
+4. Ensure responsive design works on all screen sizes
 
 
 ## 👤 Author
